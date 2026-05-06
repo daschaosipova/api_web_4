@@ -16,7 +16,7 @@ def fetch_apod_nasa(token="DEMO_KEY", count=50):
     for element in response.json():
         image_url = element["url"]
         images_urls.append(image_url)
-    folder = Path("images_nasa")
+    folder = Path("images")
     folder.mkdir(parents=True, exist_ok=True)
     for image_url_number, image_url in enumerate(images_urls):
         extension = define_image_extension(image_url)

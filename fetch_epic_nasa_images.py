@@ -20,7 +20,7 @@ def fetch_epic_nasa(token="DEMO_KEY"):
         params=payload,
     )
     response.raise_for_status()
-    folder = Path("epic_images_nasa")
+    folder = Path("images")
     folder.mkdir(parents=True, exist_ok=True)
     for element in response.json()[:10]:
         name = f"{element['image']}.png"
