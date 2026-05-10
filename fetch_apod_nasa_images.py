@@ -1,5 +1,7 @@
 import os
 import requests
+import argparse
+import sys
 from dotenv import load_dotenv
 from pathlib import Path
 from download_helpers import download_image, define_image_extension
@@ -43,7 +45,7 @@ def main():
     parser = create_parser()
     namespace = parser.parse_args(sys.argv[1:])
     images_count = namespace.images_count
-    fetch_apod_nasa(token=os.getenv("NASA_TOKEN","DEMO_KEY"), images_count)
+    fetch_apod_nasa(token=os.getenv("NASA_TOKEN","DEMO_KEY"), count=images_count)
 
 
 if __name__ == "__main__":
