@@ -24,7 +24,7 @@ def create_parser():
     return parser
 
 
-def post_photo_tg_bot(bot, chat_id, frequency):
+def publish_all_photos_tg_bot(bot, chat_id, frequency):
     images = []
     for root, dirs, files in os.walk("images"):
         for name in files:
@@ -51,7 +51,7 @@ def main():
     namespace = parser.parse_args(sys.argv[1:])
     frequency = namespace.frequency
     try:
-        post_photo_tg_bot(bot, tg_channel_id, frequency)
+        publish_all_photos_tg_bot(bot, tg_channel_id, frequency)
     except KeyboardInterrupt:
         print("\nПубликация остановлена пользователем.")
 
