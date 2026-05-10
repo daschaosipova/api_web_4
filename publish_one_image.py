@@ -1,6 +1,5 @@
 import os
 import telegram
-import time
 import random
 import argparse
 import sys
