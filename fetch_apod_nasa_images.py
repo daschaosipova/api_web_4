@@ -7,7 +7,21 @@ from download_helpers import download_image, define_image_extension
 load_dotenv(".env")
 
 
-def fetch_apod_nasa(token="DEMO_KEY", count=50):
+def create_parser():
+    parser = argparse.ArgumentParser()
+    images_count = os.getenv("IMAGES_COUNT_NASA", 50)
+    parser.add_argument(
+        "-c",
+        "--images_count",
+        help="Количество фото для скачивания",
+        type=int,
+        default=int(images_count),
+    )
+
+    return parser
+
+
+def fetch_apod_nasa(token, count):
     payload = {"count": count, "api_key": token}
     response = requests.get(
         "https://api.nasa.gov/planetary/apod", params=payload
@@ -26,7 +40,10 @@ def fetch_apod_nasa(token="DEMO_KEY", count=50):
 
 
 def main():
-    fetch_apod_nasa(token=os.environ["NASA_TOKEN"], count=30)
+    parser = create_parser()
+    namespace = parser.parse_args(sys.argv[1:])
+    images_count = namespace.images_count
+    fetch_apod_nasa(token=os.getenv("NASA_TOKEN","DEMO_KEY"), images_count)
 
 
 if __name__ == "__main__":
