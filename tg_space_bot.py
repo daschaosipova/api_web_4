@@ -12,12 +12,13 @@ load_dotenv(".env")
 
 def create_parser():
     parser = argparse.ArgumentParser()
+    env_frequency = os.getenv("PUBLISH_FREQUENCY", 14400)
     parser.add_argument(
         "-f",
         "--frequency",
         help="Частота публикации фото в секундах",
-        default=14400,
         type=int,
+        default=int(env_frequency),
     )
 
     return parser
