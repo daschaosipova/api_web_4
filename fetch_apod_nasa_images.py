@@ -41,12 +41,13 @@ def fetch_apod_nasa(token, count, email):
 
 def main():
     load_dotenv(".env")
-    user_email = os.environ.get("EMAIL")
+    nasa_token = os.getenv("NASA_TOKEN", "DEMO_KEY")
+    user_email = os.getenv("EMAIL")
     parser = create_parser()
     namespace = parser.parse_args(sys.argv[1:])
     images_count = namespace.images_count
     fetch_apod_nasa(
-        token=os.getenv("NASA_TOKEN", "DEMO_KEY"),
+        token=nasa_token,
         count=images_count,
         email=user_email,
     )
