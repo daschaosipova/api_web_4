@@ -4,8 +4,6 @@ from dotenv import load_dotenv
 from pathlib import Path
 from download_helpers import download_image
 
-load_dotenv(".env")
-
 
 def fetch_epic_nasa(token="DEMO_KEY"):
     payload = {"api_key": token}
@@ -34,6 +32,7 @@ def fetch_epic_nasa(token="DEMO_KEY"):
 
 
 def main():
+    load_dotenv(".env")
     fetch_epic_nasa(token=os.environ["NASA_TOKEN"])
 
 
