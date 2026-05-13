@@ -1,10 +1,7 @@
 import os
 import requests
 import urllib.parse
-from dotenv import load_dotenv
 from urllib.parse import urlsplit
-
-load_dotenv(".env")
 
 
 def define_image_extension(url):
