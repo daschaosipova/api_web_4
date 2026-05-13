@@ -7,9 +7,6 @@ import sys
 from dotenv import load_dotenv
 
 
-load_dotenv(".env")
-
-
 def create_parser():
     parser = argparse.ArgumentParser()
     env_frequency = os.getenv("PUBLISH_FREQUENCY", 14400)
@@ -44,6 +41,7 @@ def publish_all_photos_tg_bot(bot, chat_id, frequency):
 
 
 def main():
+    load_dotenv(".env")
     tg_token = os.getenv("TG_SPACE_TOKEN")
     bot = telegram.Bot(token=tg_token)
     tg_channel_id = os.getenv("TG_CHANNEL")
