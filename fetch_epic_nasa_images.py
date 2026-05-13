@@ -20,7 +20,7 @@ def fetch_epic_nasa(token, email):
     response.raise_for_status()
     folder = Path("images")
     folder.mkdir(parents=True, exist_ok=True)
-    for element in response.json()[:10]:
+    for element in response.json():
         name = f"{element['image']}.png"
         archive = (
             f"https://epic.gsfc.nasa.gov/archive/natural/"
