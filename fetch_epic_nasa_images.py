@@ -5,7 +5,7 @@ from pathlib import Path
 from download_helpers import download_image
 
 
-def fetch_epic_nasa(token="DEMO_KEY"):
+def fetch_epic_nasa(token, email):
     payload = {"api_key": token}
     all_epic_images = requests.get(
         "https://api.nasa.gov/EPIC/api/natural/all", params=payload
@@ -28,12 +28,14 @@ def fetch_epic_nasa(token="DEMO_KEY"):
         )
         image_url = f"{archive}{name}"
         filepath = folder / name
-        download_image(image_url, filepath)
+        download_image(image_url, filepath, email)
 
 
 def main():
     load_dotenv(".env")
-    fetch_epic_nasa(token=os.environ["NASA_TOKEN"])
+    nasa_token = os.getenv("NASA_TOKEN", "DEMO_KEY")
+    user_email = os.getenv("EMAIL")
+    fetch_epic_nasa(token=nasa_token, email=user_email)
 
 
 if __name__ == "__main__":
