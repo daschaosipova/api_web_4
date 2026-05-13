@@ -26,6 +26,7 @@ def fetch_apod_nasa(token, count, email):
     response = requests.get(
         "https://api.nasa.gov/planetary/apod", params=payload
     )
+    response.raise_for_status()
     images_urls = []
     for element in response.json():
         image_url = element["url"]
