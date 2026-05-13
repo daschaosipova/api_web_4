@@ -10,9 +10,9 @@ def define_image_extension(url):
     return extension
 
 
-def download_image(url, filepath):
+def download_image(url, filepath, email):
     headers = {
-        "User-Agent": f"MyCoolApp/1.0 ({os.environ['EMAIL']}) Python-requests/2.31"
+        "User-Agent": f"MyCoolApp/1.0 ({email}) Python-requests/2.31"
     }
     response = requests.get(url, headers=headers)
     response.raise_for_status()
