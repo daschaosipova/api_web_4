@@ -6,8 +6,6 @@ from dotenv import load_dotenv
 from pathlib import Path
 from download_helpers import download_image, define_image_extension
 
-load_dotenv(".env")
-
 
 def create_parser():
     parser = argparse.ArgumentParser()
@@ -42,6 +40,7 @@ def fetch_apod_nasa(token, count):
 
 
 def main():
+    load_dotenv(".env")
     parser = create_parser()
     namespace = parser.parse_args(sys.argv[1:])
     images_count = namespace.images_count
