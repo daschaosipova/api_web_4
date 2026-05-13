@@ -7,9 +7,8 @@ from pathlib import Path
 from download_helpers import download_image, define_image_extension
 
 
-def create_parser():
+def create_parser(images_count):
     parser = argparse.ArgumentParser()
-    images_count = os.getenv("IMAGES_COUNT_NASA", 50)
     parser.add_argument(
         "-c",
         "--images_count",
@@ -44,7 +43,8 @@ def main():
     load_dotenv(".env")
     nasa_token = os.getenv("NASA_TOKEN", "DEMO_KEY")
     user_email = os.getenv("EMAIL")
-    parser = create_parser()
+    env_images_count = os.getenv("IMAGES_COUNT_NASA", 50)
+    parser = create_parser(images_count=env_images_count)
     namespace = parser.parse_args(sys.argv[1:])
     images_count = namespace.images_count
     fetch_apod_nasa(
