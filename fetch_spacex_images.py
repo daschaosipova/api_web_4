@@ -5,8 +5,6 @@ from dotenv import load_dotenv
 from pathlib import Path
 from download_helpers import download_image
 
-load_dotenv(".env")
-
 
 def create_parser():
     parser = argparse.ArgumentParser()
@@ -33,6 +31,7 @@ def fetch_spacex_last_launch(launch_id):
 
 
 def main():
+    load_dotenv(".env")
     parser = create_parser()
     namespace = parser.parse_args(sys.argv[1:])
     launch_id = namespace.launch_id
