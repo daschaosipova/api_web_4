@@ -21,7 +21,7 @@ def create_parser():
     return parser
 
 
-def fetch_apod_nasa(token, count):
+def fetch_apod_nasa(token, count, email):
     payload = {"count": count, "api_key": token}
     response = requests.get(
         "https://api.nasa.gov/planetary/apod", params=payload
@@ -36,16 +36,19 @@ def fetch_apod_nasa(token, count):
         extension = define_image_extension(image_url)
         filename = f"nasa_apod_{image_url_number}{extension}"
         filepath = folder / filename
-        download_image(image_url, filepath)
+        download_image(image_url, filepath, email)
 
 
 def main():
     load_dotenv(".env")
+    user_email = os.environ.get("EMAIL")
     parser = create_parser()
     namespace = parser.parse_args(sys.argv[1:])
     images_count = namespace.images_count
     fetch_apod_nasa(
-        token=os.getenv("NASA_TOKEN", "DEMO_KEY"), count=images_count
+        token=os.getenv("NASA_TOKEN", "DEMO_KEY"),
+        count=images_count,
+        email=user_email,
     )
 
 
