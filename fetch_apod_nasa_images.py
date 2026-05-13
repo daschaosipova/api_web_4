@@ -8,11 +8,13 @@ from download_helpers import download_image, define_image_extension
 
 
 def create_parser(images_count):
-    parser = argparse.ArgumentParser()
+    parser = argparse.ArgumentParser(
+        description="Программа для автоматического скачивания астрономических картинок дня (APOD) с сайта NASA."
+    )
     parser.add_argument(
         "-c",
         "--images_count",
-        help="Количество фото для скачивания",
+        help="Количество фотографий, которое необходимо скачать (по умолчанию: %(default)s)",
         type=int,
         default=int(images_count),
     )
