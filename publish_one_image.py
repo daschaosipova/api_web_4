@@ -6,9 +6,6 @@ import sys
 from dotenv import load_dotenv
 
 
-load_dotenv(".env")
-
-
 def pick_random_image():
     images = []
     for root, dirs, files in os.walk("images"):
@@ -42,6 +39,7 @@ def publish_photo_tg_bot(bot, chat_id, image_path):
 
 
 def main():
+    load_dotenv(".env")
     tg_token = os.getenv("TG_SPACE_TOKEN")
     bot = telegram.Bot(token=tg_token)
     tg_channel_id = os.getenv("TG_CHANNEL")
