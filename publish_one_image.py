@@ -12,19 +12,19 @@ def pick_random_image():
         for name in files:
             images.append(os.path.join(root, name))
     if not images:
-        print("Ошибка: папка 'images' пуста или не найдена.")
-        return
-    image_path = random.choice(images)
-    return image_path
+        return None
+    return random.choice(images)
 
 
-def create_parser(image_path):
-    parser = argparse.ArgumentParser()
+def create_parser():
+    parser = argparse.ArgumentParser(
+        description="Программа для публикации одного конкретного или случайного изображения в Telegram"
+    )
     parser.add_argument(
         "-i",
         "--image_path",
-        help="Название и путь до фото",
-        default=image_path,
+        help="Путь к конкретному изображению. Если не указан, берется случайное изображение из папки 'images'.",
+        default=None,
     )
 
     return parser
@@ -43,9 +43,14 @@ def main():
     tg_token = os.getenv("TG_SPACE_TOKEN")
     bot = telegram.Bot(token=tg_token)
     tg_channel_id = os.getenv("TG_CHANNEL")
-    parser = create_parser(pick_random_image())
+    parser = create_parser()
     namespace = parser.parse_args(sys.argv[1:])
     image_path = namespace.image_path
+    if not image_path:
+        image_path = pick_random_image()
+    if not image_path:
+        print("Ошибка: Не указан путь к файлу, а папка 'images' пуста или отсутствует.")
+        return
     publish_photo_tg_bot(bot=bot, chat_id=tg_channel_id, image_path=image_path)
 
 
