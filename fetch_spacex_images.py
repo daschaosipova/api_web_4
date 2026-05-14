@@ -7,9 +7,12 @@ from download_helpers import download_image
 
 
 def create_parser():
-    parser = argparse.ArgumentParser()
+    parser = argparse.ArgumentParser(description="Программа для автоматического скачивания фотография ракетного запуска с сайта SpaceX.")
     parser.add_argument(
-        "-id", "--launch_id", help="id Запуска", default="latest"
+        "-id",
+        "--launch_id",
+        help="id Запуска, фотографии которого необходимо скачать (последний запуск по умолчанию)",
+        default="latest",
     )
 
     return parser
