@@ -8,11 +8,13 @@ from dotenv import load_dotenv
 
 
 def create_parser(env_frequency):
-    parser = argparse.ArgumentParser()
+    parser = argparse.ArgumentParser(
+        descreption="Программа для автоматической публикации изображений из папки 'images' в Telegram-канал с заданным интервалом"
+    )
     parser.add_argument(
         "-f",
         "--frequency",
-        help="Частота публикации фото в секундах",
+        help="Частота публикации фото в секундах (по умолчанию берется из .env или равна 14400)",
         type=int,
         default=int(env_frequency),
     )
